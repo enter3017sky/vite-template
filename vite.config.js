@@ -6,11 +6,14 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
+import VueI18n from '@intlify/vite-plugin-vue-i18n'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+      // 'vue-i18n': 'vue-i18n/dist/vue-i18n.esm.browser.js',
     },
   },
   plugins: [
@@ -23,6 +26,8 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vuex',
+
+        'vue-i18n',
         // '@vueuse/core',
         // 'vitest',
 
@@ -48,5 +53,13 @@ export default defineConfig({
     }),
 
     Components(),
+
+    // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
+    VueI18n({
+      runtimeOnly: true,
+      compositionOnly: true,
+      include: [path.resolve(__dirname, 'locales/**')],
+    }),
+
   ],
 })
