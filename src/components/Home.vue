@@ -29,6 +29,12 @@ function saveName() {
 
   router.push('/about')
   console.log('newName: ', newName)
+
+  if (a) {
+    return
+  }
+
+  console.log('no-else-return')
 }
 
 // Trailing spaces not allowed.eslintno-trailing-spaces

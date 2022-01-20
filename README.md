@@ -19,3 +19,11 @@ This is essentially a fresh install of Vue 3 + Vite, ESLint, Prettier, TailwindC
 ## AutoImport
 
 - 自動按需導入 [unplugin-auto-import](https://github.com/antfu/unplugin-auto-import)
+
+remove
+
+
+    "eslint-config-prettier": "^8.3.0",
+    // "autoprefixer": "^10.3.6",
+    // "postcss": "^8.3.8",
+    // "tailwindcss": "^2.2.16",

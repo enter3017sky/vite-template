@@ -1,8 +1,9 @@
 
 import path from 'path'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import Vue from '@vitejs/plugin-vue'
 
+import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 
@@ -17,7 +18,10 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
+    // vue(),
+    Vue({
+      include: [/\.vue$/],
+    }),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -26,9 +30,8 @@ export default defineConfig({
         'vue',
         'vue-router',
         'vuex',
-
         'vue-i18n',
-        // '@vueuse/core',
+        '@vueuse/core',
         // 'vitest',
 
         {
@@ -54,6 +57,11 @@ export default defineConfig({
 
     Components(),
 
+    // https://github.com/antfu/vite-plugin-windicss
+    WindiCSS({
+      // safelist: markdownWrapperClasses,
+    }),
+
     // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
     VueI18n({
       runtimeOnly: true,
@@ -62,4 +70,18 @@ export default defineConfig({
     }),
 
   ],
+
+  //
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vue-router',
+      'vuex',
+      '@vueuse/core',
+      // '@vueuse/head',
+    ],
+    exclude: [
+      // 'vue-demi',
+    ],
+  },
 })
