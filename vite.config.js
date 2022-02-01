@@ -3,6 +3,9 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
 import WindiCSS from 'vite-plugin-windicss'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -12,6 +15,8 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
+
+    // 定義別名
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
       // 'vue-i18n': 'vue-i18n/dist/vue-i18n.esm.browser.js',
@@ -25,26 +30,44 @@ export default defineConfig({
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
+      // include: [
+      //   /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+      //   /\.vue$/,
+      //   /\.vue\?vue/, // .vue
+      //   // /\.md$/, // .md
+      // ],
+
       // global imports to register
       imports: [
         'vue',
         'vue-router',
-        'vuex',
+        // 'vuex',
+        'pinia',
         'vue-i18n',
         '@vueuse/core',
         // 'vitest',
 
         {
+          // NOTE: Pinia/store
           // 根據路徑自定義自動導入
-          '~/store/modules': [
-            // named imports
-            // import { modules } from '~/store/modules',
-            'modules',
-
-            // alias
-            // ['useFetch', 'useMyFetch']
-            // import { useFetch as useMyFetch } from '@vueuse/core',
+          '~/store/useCounterStore': [
+            'useCounterStore',
           ],
+          '~/store/useSiteStore': [
+            'useSiteStore',
+          ],
+
+          // NOTE: Vuex/store
+          // // 根據路徑自定義自動導入
+          // '~/store/modules': [
+          //   // named imports
+          //   // import { modules } from '~/store/modules',
+          //   'modules',
+
+          //   // alias
+          //   // ['useFetch', 'useMyFetch']
+          //   // import { useFetch as useMyFetch } from '@vueuse/core',
+          // ],
         },
       ],
 
@@ -55,7 +78,21 @@ export default defineConfig({
       },
     }),
 
-    Components(),
+    Components({
+      // custom resolvers
+      resolvers: [
+        // auto import icons
+        // https://github.com/antfu/unplugin-icons
+        IconsResolver({
+          prefix: false,
+          // enabledCollections: ['carbon']
+        }),
+      ],
+    }),
+
+    Icons({
+      autoInstall: true,
+    }),
 
     // https://github.com/antfu/vite-plugin-windicss
     WindiCSS({
@@ -76,7 +113,7 @@ export default defineConfig({
     include: [
       'vue',
       'vue-router',
-      'vuex',
+      // 'pinia',
       '@vueuse/core',
       // '@vueuse/head',
     ],

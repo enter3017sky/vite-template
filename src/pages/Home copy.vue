@@ -1,4 +1,7 @@
+
 <script setup>
+// NOTE: Vuex 版
+
 // import { useI18n } from 'vue-i18n'
 
 const i18n = useI18n()
@@ -63,6 +66,10 @@ const a = {
       class="p-2 mr-4 border border-gray-600 rounded"
     >{{ t('button.home') }}</span>
   </div>
+
+  <hr>
+  <router-link to="/pinia">Pinia</router-link>
+  <hr>
 
   <h1 class="mb-6 text-3xl font-extrabold">Home</h1>
   <p class="">Name in store is: <span class="font-bold">{{ name }}</span></p>

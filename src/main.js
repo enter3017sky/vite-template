@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+// import store from './store'
+
+// NOTE: AutoImport
+// import { createPinia } from 'pinia'
 
 // windicss layers
 import 'virtual:windi-base.css'
@@ -13,7 +16,7 @@ import 'virtual:windi-utilities.css'
 // windicss devtools support (dev only)
 import 'virtual:windi-devtools'
 
-// import './index.css'
+import './index.css'
 
 // TODO: https://github.com/antfu/vitesse/tree/main/src/modules
 import { createI18n } from 'vue-i18n'
@@ -44,6 +47,7 @@ const i18n = createI18n({
 
 createApp(App)
   .use(router)
-  .use(store)
+  // .use(store)
+  .use(createPinia())
   .use(i18n)
   .mount('#app')
