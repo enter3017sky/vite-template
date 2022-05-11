@@ -16,4 +16,9 @@
     "vue",
     "jsx"
   ],
+  "i18n-ally.localesPaths": [
+    "locales"
+  ],
+  "cSpell.words": ["Vitesse"],
+  "prettier.enable": false,
 }

@@ -2,12 +2,14 @@
 
 // AutoImport 省略引入 useStore, computed 的部分
 
-const store = useStore()
-const name = computed(() => {
-  return store.state.user.name
-})
+// const store = useStore()
+// const name = computed(() => {
+//   return store.state.user.name
+// })
 
+const { name } = storeToRefs(useSiteStore())
 console.log(' name ', name)
+
 </script>
 
 <template>

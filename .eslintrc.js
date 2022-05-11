@@ -52,6 +52,10 @@ module.exports = {
     'import/order': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
+
+    // 声明变量必须赋值
+    'init-declarations': ['error', 'always'],
+
     'max-len': ['error', 120],
     'no-await-in-loop': 'off',
     'no-bitwise': 'off',
@@ -171,6 +175,10 @@ module.exports = {
     'brace-style': [2, '1tbs', {
       'allowSingleLine': true,
     }],
+
+    // 禁止 if 语句中 return 语句之后有 else 块
+    'no-else-return': 1,
+    'no-empty-function': 1, // 禁止出现空函数
 
     // 無多空行
     'no-multiple-empty-lines': [2, { 'max': 1 }],
