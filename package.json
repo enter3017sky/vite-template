@@ -2,12 +2,14 @@
   "name": "vite-template",
   "version": "0.0.1",
   "scripts": {
+    "deploy": "npm run build && gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview"
   },
   "dependencies": {
     "@vueuse/core": "^7.4.1",
+    "gh-pages": "^4.0.0",
     "pinia": "^2.0.9",
     "vue": "^3.2.19",
     "vue-i18n": "^9.1.9",
@@ -34,5 +36,6 @@
     "vite": "^2.7.12",
     "vite-plugin-windicss": "^1.6.2",
     "vue-eslint-parser": "^8.0.1"
-  }
+  },
+  "homepage": "https://enter3017sky.github.io/vite-template"
 }
