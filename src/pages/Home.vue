@@ -1,96 +1,101 @@
 <script setup>
-// import { useI18n } from 'vue-i18n'
 
-import { storeToRefs } from 'pinia'
+import bigImage from './pic_big.png'
+import smallImage from './pic_s.png'
 
-const i18n = useI18n()
+const el = ref(null)
 
-const { t, availableLocales, locale } = useI18n()
+const { width } = useElementSize(el)
+const height = ref(0)
 
-const toggleLocales = () => {
-  // change to some real logic
-  const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
-}
+onMounted(() => {
+  console.log('width', width.value)
+})
 
-// console.log(availableLocales, locale)
-
-// AutoImport 省略引入 useStore, computed 的部分
-// const store = useStore()
-// const name = computed(() => {
-//   return store.state.user.name
-// })
-
-const site = useSiteStore()
-
-const { name } = storeToRefs(site)
-
-console.log(' site ', site)
-
-const router = useRouter()
-
-const newName = ref('')
-
-function saveName() {
-  // store.dispatch('saveName', newName.value)
-
-  site.saveName(newName.value)
-
-  newName.value = ''
-
-  router.push('/about')
-  console.log('newName: ', newName)
-}
-
-// Trailing spaces not allowed.eslintno-trailing-spaces
-
-const a = {
-  b: 1,
-  c: 2,
-}
-
+watchEffect(() => {
+  if (width.value) {
+    height.value = (width.value / 3.31).toFixed(2)
+  }
+})
 </script>
-
 <template>
-  <div>
-    <Navbar />
+  <div class="Demo">
+    <div class="flex justify-center mb-3">
+      <div>
+        <div
+          class="w-[360px] h-[403px] mr-3"
+          :style="{
+            'background-position': 'top',
+            'background-size': 'cover',
+            'background-image': `url(${smallImage})`
+          }"
+        />
+        <div class="text-center text-xl">360px * 403px</div>
+      </div>
 
-    <!-- class="icon-btn mx-2" -->
+      <div>
+        <div
+          class="w-[260px] h-[260px] mr-3"
+          :style="{
+            'background-position': 'top',
+            'background-size': 'cover',
+            'background-image': `url(${smallImage})`
+          }"
+        />
+        <div class="text-center text-xl">260px * 260px</div>
+      </div>
 
-    <button
-      class="btn mb-5 mr-3"
-      :title="t('button.toggle_langs')"
-      @click="toggleLocales"
+      <div>
+        <div
+          class="w-[190px] h-[124px]"
+          :style="{
+            'background-position': 'top',
+            'background-size': 'cover',
+            'background-image': `url(${smallImage})`
+          }"
+        />
+        <div class="text-center text-xl">190px * 124px</div>
+      </div>
+    </div>
+
+    <div>
+      <div
+        class="w-[1000px] h-[680px] mx-auto"
+        :style="{
+          'background-position': 'top',
+          'background-size': 'cover',
+          'background-image': `url(${bigImage})`
+        }"
+      />
+      <div class="text-center text-xl">1000px * 680px</div>
+    </div>
+
+    <div
+      ref="el"
+      class="wrapper w-full h-[580px] mt-5"
+      :style="{ height: `${height}px` }"
     >
-      <carbon-language />
-    </button>
-
-    <span
-      class="p-2 mr-4 border border-gray-600 rounded"
-    >{{ t('button.home') }}</span>
+      <img :src="bigImage">
+    </div>
+    <div class="text-center text-xl">1920 * 580px</div>
   </div>
-
-  <hr>
-  <router-link to="/pinia">Pinia</router-link>
-  <hr>
-
-  <h1 class="mb-6 text-3xl font-extrabold">Home</h1>
-  <p class="">Name in store is: <span class="font-bold">{{ name }}</span></p>
-  <p class="mb-6">
-    newName in store is: <span class="font-bold">
-      {{ newName }}</span>
-  </p>
-
-  <input
-    v-model="newName"
-    type="text"
-    class="p-2 mr-4 border border-gray-600 rounded"
-  />
-
-  <button class="p-2 text-white bg-indigo-600 rounded" @click="saveName">
-    Submit
-  </button>
-
-  <SideBar />
-  <Footer />
 </template>
+<style lang="postcss" scoped>
+
+.Demo {
+  background:  white;
+  /* height: 100vh; */
+
+  padding-bottom: 100px;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+img {
+  width: 100%;
+  /* object-fit: contain; */
+}
+
+</style>
